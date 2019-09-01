@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompositeKeyDictionary.cs" />
     <Compile Include="ICompositeKey.cs" />
     <Compile Include="ICompositeKeyDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -16,6 +16,11 @@ namespace Collections
             where TName : IEquatable<TName>
     {
         /// <summary>
+        ///     Gets the total count of elements int this dictionary.
+        /// </summary>
+        int Count { get; }
+
+        /// <summary>
         ///     Adds specified item.
         /// </summary>
         /// <param name="item">Item to add.</param>
