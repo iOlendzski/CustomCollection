@@ -10,23 +10,20 @@ namespace Collections
     /// <typeparam name="TId">The type of Id component of key.</typeparam>
     /// <typeparam name="TName">The type of Name component of key.</typeparam>
     /// <typeparam name="TValue">The type of items.</typeparam>
-    public interface ICompositeKeyDictionary<in TId, in TName, TValue>
+    public interface ICompositeKeyDictionary<TId, TName, TValue> : ICollection<TValue>
             where TValue : ICompositeKey<TId, TName>
             where TId : IEquatable<TId>
             where TName : IEquatable<TName>
     {
         /// <summary>
-        ///     Gets the total count of elements int this dictionary.
+        ///     Enumerates all keys in this dictionary.
         /// </summary>
-        int Count { get; }
+        IEnumerable<ICompositeKey<TId, TName>> Keys { get; }
 
         /// <summary>
-        ///     Adds specified item.
+        ///     Enumerates all values in this dictionary.
         /// </summary>
-        /// <param name="item">Item to add.</param>
-        /// <exception cref="ArgumentNullException">Parameter <paramref name="item" /> is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentException">This dictionary already contains this key.</exception>
-        void Add(TValue item);
+        IEnumerable<TValue> Values { get; }
 
         /// <summary>
         ///     Gets the element with the specified key.
@@ -45,7 +42,7 @@ namespace Collections
         /// <returns>The element that has the specified key.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="id" /> is <see langword="null" />.</exception>
         /// <exception cref="KeyNotFoundException">Specified key not found.</exception>
-        IReadOnlyCollection<TValue> GetValues(TId id);
+        IReadOnlyCollection<TValue> GetValuesById(TId id);
 
         /// <summary>
         ///     Gets all elements with the specified key.
@@ -54,7 +51,7 @@ namespace Collections
         /// <returns>The element that has the specified key.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="name" /> is <see langword="null" />.</exception>
         /// <exception cref="KeyNotFoundException">Specified key not found.</exception>
-        IReadOnlyCollection<TValue> GetValues(TName name);
+        IReadOnlyCollection<TValue> GetValuesByName(TName name);
 
         /// <summary>
         ///     Removes the element with the specified key.
@@ -69,14 +66,14 @@ namespace Collections
         /// </summary>
         /// <param name="id">The <see cref="ICompositeKey{TId,TName}.Id" /> to remove.</param>
         /// <returns>Number of removed elements.</returns>
-        int RemoveAll(TId id);
+        int RemoveAllById(TId id);
 
         /// <summary>
         ///     Removes all elements with the specified key.
         /// </summary>
         /// <param name="name">The <see cref="ICompositeKey{TId,TName}.Name" /> to remove.</param>
         /// <returns>Number of removed elements.</returns>
-        int RemoveAll(TName name);
+        int RemoveAllByName(TName name);
 
         /// <summary>
         ///     Gets the element with the specified key.
@@ -95,7 +92,7 @@ namespace Collections
         /// <param name="values">When this method returns, the values associated with specified key, if the key is found; otherwise, <see langword="null" />.</param>
         /// <returns><see langword="true" /> if the element is successfully removed; otherwise, <see langword="false" />.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="id" /> is <see langword="null" />.</exception>
-        bool TryGetValues(TId id, out IReadOnlyCollection<TValue> values);
+        bool TryGetValuesById(TId id, out IReadOnlyCollection<TValue> values);
 
         /// <summary>
         ///     Gets all elements with the specified key.
@@ -104,6 +101,6 @@ namespace Collections
         /// <param name="values">When this method returns, the values associated with specified key, if the key is found; otherwise, <see langword="null" />.</param>
         /// <returns><see langword="true" /> if the element is successfully removed; otherwise, <see langword="false" />.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="name" /> is <see langword="null" />.</exception>
-        bool TryGetValues(TName name, out IReadOnlyCollection<TValue> values);
+        bool TryGetValuesByName(TName name, out IReadOnlyCollection<TValue> values);
     }
 }

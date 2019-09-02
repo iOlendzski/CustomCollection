@@ -18,5 +18,16 @@ namespace CustomCollections.Tests
         {
             return $"[{Id} : {Name}]";
         }
+
+        public User()
+        {
+
+        }
+
+        public User(UserId id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }
